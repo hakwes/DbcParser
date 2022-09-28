@@ -152,7 +152,11 @@ namespace DbcParserLib.Tests
         public void ValueTableWithMapDefinitionIsParsedAndLinkedToChannel()
         {
             var dbcBuilderMock = m_repository.Create<IDbcBuilder>();
-            dbcBuilderMock.Setup(builder => builder.LinkTableValuesToSignal(470, "channelName", Helpers.ConvertToMultiLine(@"3 ""AEB_LOCK_STATE_SNA"" 2 ""AEB_LOCK_STATE_UNUSED"" 1 ""AEB_LOCK_STATE_UNLOCKED"" 0 ""AEB_LOCK_STATE_LOCKED""".SplitBySpace(), 0)));
+            dbcBuilderMock.Setup(builder => builder.LinkTableValuesToSignal(
+                470,
+                "channelName",
+                Helpers.ConvertToMultiLine(@"3 ""AEB_LOCK_STATE_SNA"" 2 ""AEB_LOCK_STATE_UNUSED"" 1 ""AEB_LOCK_STATE_UNLOCKED"" 0 ""AEB_LOCK_STATE_LOCKED""".SplitBySpace(), 0),
+                It.IsAny<string>()));
             var commentLineParser = CreateParser();
 
             Assert.IsTrue(commentLineParser.TryParse(@"VAL_ 470 channelName 3 ""AEB_LOCK_STATE_SNA"" 2 ""AEB_LOCK_STATE_UNUSED"" 1 ""AEB_LOCK_STATE_UNLOCKED"" 0 ""AEB_LOCK_STATE_LOCKED"" ;", dbcBuilderMock.Object));

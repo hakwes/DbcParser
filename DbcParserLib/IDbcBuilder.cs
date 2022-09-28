@@ -12,6 +12,6 @@ namespace DbcParserLib
         void AddSignal(Signal signal);
         void AddSignalComment(uint messageID, string signalName, string comment);
         void LinkNamedTableToSignal(uint messageId, string signalName, string tableName);
-        void LinkTableValuesToSignal(uint messageId, string signalName, string values);
+        void LinkTableValuesToSignal(uint messageId, string signalName, string values, string line ="");
     }
 }

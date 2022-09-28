@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using int8_T = System.SByte;
-using uint8_T = System.Byte;
-using int16_T = System.Int16;
-using uint16_T = System.UInt16;
-using int32_T = System.Int32;
-using uint32_T = System.UInt32;
-using int64_T = System.Int64;
-using uint64_T = System.UInt64;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using int16_T = System.Int16;
+using int32_T = System.Int32;
+using int64_T = System.Int64;
+using int8_T = System.SByte;
+using uint16_T = System.UInt16;
+using uint32_T = System.UInt32;
+using uint64_T = System.UInt64;
+using uint8_T = System.Byte;
 
 /* 
  * ------------------------------------
@@ -51,6 +51,7 @@ namespace DbcParserLib
         public string Unit;
         public string[] Receiver;
         public string ValueTable;
+        public Dictionary<double,string> Descriptions = new Dictionary<double, string>();
         public string Comment;
         public string Multiplexing;
     }
