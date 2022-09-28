@@ -53,6 +53,7 @@ namespace DbcParserLib.Model
         public string Unit;
         public string[] Receiver;
         public string ValueTable;
+        public Dictionary<double, string> Descriptions = new Dictionary<double, string>();
         public string Comment;
         public string Multiplexing;
     }

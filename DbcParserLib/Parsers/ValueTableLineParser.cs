@@ -1,16 +1,16 @@
-using DbcParserLib.Model;
 using System;
+using System.Linq;
 using System.Xml.Schema;
+using DbcParserLib.Model;
 
 namespace DbcParserLib.Parsers
 {
     public class ValueTableLineParser : ILineParser
     {
         private const string ValueTableLineStarter = "VAL_";
-
         public bool TryParse(string line, IDbcBuilder builder)
         {
-            if(line.TrimStart().StartsWith(ValueTableLineStarter) == false)
+            if (line.TrimStart().StartsWith(ValueTableLineStarter) == false)
                 return false;
 
             line = line.Trim(';');
@@ -37,13 +37,13 @@ namespace DbcParserLib.Parsers
 
                 return true;
             }
-            
+
             var parsed = false;
-            if(line.TrimStart().StartsWith("VAL_ "))
+            if (line.TrimStart().StartsWith("VAL_ "))
             {
                 parsed = true;
 
-                if(uint.TryParse(records[1], out var messageId))
+                if (uint.TryParse(records[1], out var messageId))
                 {
                     if (records.Length == 4)
                     {
@@ -59,11 +59,11 @@ namespace DbcParserLib.Parsers
                         valueTable = line.Substring(idxFrom, length);
                         valueTable = valueTable.Replace("\" ", "\"" + Environment.NewLine);
 
-                        builder.LinkTableValuesToSignal(messageId, records[2], valueTable);
+                        builder.LinkTableValuesToSignal(messageId, records[2], valueTable,line);
                     }
                 }
             }
-            
+
             return parsed;
         }
     }

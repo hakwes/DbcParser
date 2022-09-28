@@ -91,13 +91,43 @@ namespace DbcParserLib
             m_namedTables[name] = values;
         }
 
-        public void LinkTableValuesToSignal(uint messageId, string signalName, string values)
+        public void LinkTableValuesToSignal(uint messageId, string signalName, string values, string valueTableLine = "")
         {
             IsExtID(ref messageId);
             if (TryGetValueMessageSignal(messageId, signalName, out var signal))
             {
                 signal.ValueTable = values;
+                signal.Descriptions = CreateDescription(valueTableLine);
+            };
+        }
+        private Dictionary<double, string> CreateDescription(string valueTableLine)
+        {
+            var descriptionDictionary = new Dictionary<double, string>();
+            var line = valueTableLine
+                .Trim()
+                .Split(new[] { ' ' }, 4);
+            if (line?.Length > 3)
+            {
+                var descriptions = line[3]
+                    .Trim(' ', ';')
+                    .Split(new string[] { @"""" }, System.StringSplitOptions.RemoveEmptyEntries)
+                    .Select(p => p.Trim()).ToArray();
+
+                // Must be a pair
+                if (descriptions.Length % 2 == 0)
+                {
+                    for (int i = 0; i < descriptions.Length; i += 2)
+                    {
+                        var value = int.Parse(descriptions[i]);
+                        var description = descriptions[i + 1];
+                        if (!descriptionDictionary.ContainsKey(value))
+                        {
+                            descriptionDictionary.Add(value, description);
+                        }
+                    }
+                }
             }
+            return descriptionDictionary;
         }
         public static bool IsExtID(ref uint id)
         {
@@ -140,6 +170,8 @@ namespace DbcParserLib
 
             return new Dbc(m_nodes.ToArray(), m_messages.Values.ToArray());
         }
+
+
     }
 
     internal class NodeEqualityComparer : IEqualityComparer<Node>
@@ -150,7 +182,7 @@ namespace DbcParserLib
                 return true;
             else if (b1 == null || b2 == null)
                 return false;
-            else if(b1.Name == b2.Name)
+            else if (b1.Name == b2.Name)
                 return true;
             else
                 return false;

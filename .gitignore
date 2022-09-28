@@ -14,3 +14,6 @@ Demo/bin/
 
 # Misc
 *.ini
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
