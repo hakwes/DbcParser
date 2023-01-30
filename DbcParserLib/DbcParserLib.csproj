@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+<!-- Remarks: The fork resides in https://github.com/hakwes/DbcParser/tree/currentinternalrelease where the latest release is
+              the currentinternalrelease branch.
+              The library is used by the CanDbcDecored module -->
   <PropertyGroup>
 	<OutputType>Library</OutputType>
-    <TargetFrameworks>netstandard2.0;net461;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <Authors>Emanuel Feru</Authors>
-    <Description>DbcParserLib is a .NET dbc file parser library for CAN bus network signals. This library can also be used to pack and unpack CAN signals.</Description>
+    <Description>This is a fork if the DbcParserLib. The DbcParserLib is a .NET dbc file parser library for CAN bus network signals. This library can also be used to pack and unpack CAN signals.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/hakwes/DbcParser</PackageProjectUrl>
     <RepositoryUrl>https://github.com/EFeru/DbcParser</RepositoryUrl>
@@ -16,6 +18,7 @@
 - various bug fixes on parsit Value table, MsgCycleTime, SigInitialValue</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.2.0</Version>
+    <AssemblyName>DbcParserLibFork</AssemblyName>
   </PropertyGroup>
 
 </Project>
